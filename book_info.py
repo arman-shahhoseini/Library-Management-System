@@ -15,7 +15,7 @@ book_data = {
         'information_book12': {'978-964-311-919-5': {'Title': "The Bastard of Istanbul", 'Author': 'Elif Shafak', 'Genre': 'Turkish Novels', 'Edition': '1', 'Date': '2015'}},
         'information_book13': {'978-964-8175-01-2': {'Title': "The Other Father", 'Author': 'Parnioush Saniee', 'Genre': 'Persian Novels', 'Edition': '8', 'Date': '2009'}},
         'information_book14': {'978-622-201-946-4': {'Title': "The Confessions of Harry Leder", 'Author': 'Walter Tevis', 'Genre': 'American Novels', 'Edition': '1', 'Date': '2021'}},
-        'information_book15': {'978-600-9896-25-7': {'Title': "Animal Farm", 'Author': 'George Orwell', 'Genre': 'English Novels', 'Edition': '5', 'Date': '2021'}}
+        'information_book15': {'7': {'Title': "Animal Farm", 'Author': 'George Orwell', 'Genre': 'English Novels', 'Edition': '5', 'Date': '2021'}}
 }
 
 
@@ -33,9 +33,14 @@ class BookData:
             'Date': date
         }
 
-        book_key = f"information_book{len(self.book_data) + 1}"
+        for book_key, book_dict in self.book_data.items():
+            for isbn2, book_details in book_dict.items():
+                if isbn == isbn2:
+                    return False
 
+        book_key = f"information_book{len(self.book_data) + 1}"
         self.book_data[book_key] = {isbn: book_info}
+        return True
 
     def delete_book(self, filename, identifier):
         workbook = openpyxl.load_workbook(filename)
