@@ -118,10 +118,14 @@ class LibraryManagement(tk.Tk):
         self.add_window.destroy()
 
     def add_book_to_data(self, isbn, title, author, genre, edition, date):
-        book_info.add_book(isbn, title, author, genre, edition, date)
-        xlsx.create_excel(self.filename)
-        messagebox.showinfo("Success", "Book added successfully!")
-        os.system('cls')
+        add = book_info.add_book(isbn, title, author, genre, edition, date)
+        print(add)
+        if add :
+            messagebox.showinfo("Success", "Book added successfully!")
+            xlsx.create_excel(self.filename)
+        else :
+            messagebox.showinfo("Error", "Book already has , Please try again.")
+        
 
     def delete_book(self):
         delete_window = tk.Toplevel(self)
@@ -170,6 +174,8 @@ class LibraryManagement(tk.Tk):
             messagebox.showinfo("Success", "Book deleted successfully!")
         else:
             messagebox.showinfo("Error", f"No book found with identifier '{identifier}'. Please try again.")
+       
+        
 
     def show_books(self):
         data = book_info.show_books(self.filename)
