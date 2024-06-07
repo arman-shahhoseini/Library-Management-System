@@ -119,7 +119,6 @@ class LibraryManagement(tk.Tk):
 
     def add_book_to_data(self, isbn, title, author, genre, edition, date):
         add = book_info.add_book(isbn, title, author, genre, edition, date)
-        print(add)
         if add :
             messagebox.showinfo("Success", "Book added successfully!")
             xlsx.create_excel(self.filename)
